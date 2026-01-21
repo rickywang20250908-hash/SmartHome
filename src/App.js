@@ -1,8 +1,180 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Wind, Shield, Smartphone, Zap, Music, ArrowRight, Menu, X, Thermometer, ChevronRight, Mail, Sparkles, MessageSquare, Send } from 'lucide-react';
+import { Sun, Moon, Wind, Shield, Smartphone, Zap, Music, ArrowRight, Menu, X, Thermometer, ChevronRight, Mail, Sparkles, MessageSquare, Send, Globe } from 'lucide-react';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+const TRANSLATIONS = {
+  zh: {
+    nav: {
+      features: "解决方案",
+      demo: "在线体验",
+      history: "过往案例",
+      contact: "联系我们"
+    },
+    hero: {
+      tag: "🚀 AI 驱动的下一代智能家居系统",
+      title_start: "您的家，",
+      title_end: "比想象中更懂您",
+      desc: "不仅仅是远程控制，而是真正的感知与自动化。我们要打造的，是一个能感知您温度、习惯与情绪的居住空间。",
+      btn_demo: "立即体验 Demo",
+      btn_learn: "了解方案"
+    },
+    demo: {
+      powered_by: "Powered by Gemini",
+      title: "指尖上的未来",
+      desc: "现在，我们将一张真实的客厅照片接入了系统。您可以手动点击，或者直接告诉 AI 您想做什么。",
+      ai_title: "AI 意图识别",
+      ai_placeholder: "试着输入: '我想看个电影' 或 '有点冷，我要看书'...",
+      ai_btn: "AI 执行指令",
+      ai_thinking: "思考中...",
+      manual_title: "手动控制",
+      light_main: "主照明",
+      status_on: "开启",
+      status_off: "关闭",
+      temp_control: "温控",
+      scene_mode: "场景模式",
+      scene_read: "明亮",
+      scene_movie: "影院",
+      room_temp: "室内温度",
+      mode_active: "影院模式已激活",
+      scene_label: "CURRENT SCENE",
+      scene_cinema: "CINEMA",
+      scene_daily: "DAILY LIGHT"
+    },
+    features: {
+      title: "全屋智能解决方案",
+      subtitle: "我们不仅仅销售硬件，更提供完整的场景化设计。",
+      light_title: "智能照明系统",
+      light_desc: "随心而动的光影。根据时间、天气和您的活动自动调节色温与亮度，营造完美氛围。",
+      security_title: "主动安防监控",
+      security_desc: "不仅仅是录像。AI识别陌生人，异常情况毫秒级推送，离家模式自动布防。",
+      climate_title: "环境与气候",
+      climate_desc: "恒温、恒湿、恒氧。空调、地暖与新风系统的联动控制，懂您的体感舒适度。"
+    },
+    history: {
+      title: "开发历程 & Demo",
+      subtitle: "从简单的单片机控制到复杂的全屋互联，这是我们的足迹。",
+      btn_github: "查看 GitHub 仓库",
+      items: [
+        {
+          year: "2025",
+          title: "Project Alpha: 语音中控中心",
+          desc: "成功开发出基于本地大模型的离线语音助手，无需联网即可控制家中所有设备，保护隐私。",
+          tags: ['Python', 'IoT', 'Voice AI']
+        },
+        {
+          year: "2024",
+          title: "Smart Mirror V2",
+          desc: "第二代智能魔镜Demo。集成日程显示、天气预报及健康数据分析，主要用于浴室场景。",
+          tags: ['React Native', 'Raspberry Pi']
+        },
+        {
+          year: "2023",
+          title: "基于 Zigbee 的灯光阵列",
+          desc: "最早的原型验证。实现了对50+灯泡的低延迟同步控制，解决了大规模组网的丢包问题。",
+          tags: ['C++', 'Zigbee', 'Hardware']
+        }
+      ]
+    },
+    contact: {
+      title: "准备好升级您的生活空间了吗？",
+      desc: "留下您的联系方式，我们将提供免费的上门勘测与方案设计。",
+      ai_title: "智能家居顾问 (AI Beta)",
+      ai_online: "Online",
+      ai_hint: "有什么不清楚的吗？随便问问 AI，比如“全屋智能大概多少钱？”",
+      ai_placeholder: "请输入您的问题...",
+      ai_busy: "抱歉，我现在有点忙，请直接拨打我们的电话咨询。",
+      footer: "© 2026 SmartLife Tech. All rights reserved."
+    }
+  },
+  en: {
+    nav: {
+      features: "Solutions",
+      demo: "Demo",
+      history: "Case Studies",
+      contact: "Contact"
+    },
+    hero: {
+      tag: "🚀 AI-Driven Next Gen Interactive Home",
+      title_start: "Your Home,",
+      title_end: "Knows You Better",
+      desc: "Beyond remote control—true perception and automation. We build living spaces that sense your temperature, habits, and mood.",
+      btn_demo: "Try Demo",
+      btn_learn: "Learn More"
+    },
+    demo: {
+      powered_by: "Powered by Gemini",
+      title: "Future at Your Fingertips",
+      desc: "We've connected a real living room photo to the system. Tap manually or tell AI what you want to do.",
+      ai_title: "AI Intent Recognition",
+      ai_placeholder: "Try: 'I want to watch a movie' or 'It's cold, I want to read'...",
+      ai_btn: "Execute Command",
+      ai_thinking: "Thinking...",
+      manual_title: "Manual Control",
+      light_main: "Main Light",
+      status_on: "ON",
+      status_off: "OFF",
+      temp_control: "Temp",
+      scene_mode: "Scene",
+      scene_read: "Bright",
+      scene_movie: "Cinema",
+      room_temp: "Room Temp",
+      mode_active: "Cinema Mode Active",
+      scene_label: "CURRENT SCENE",
+      scene_cinema: "CINEMA",
+      scene_daily: "DAILY LIGHT"
+    },
+    features: {
+      title: "Whole-Home Solutions",
+      subtitle: "We don't just sell hardware; we provide complete scenario designs.",
+      light_title: "Smart Lighting",
+      light_desc: "Lights that move with you. Auto-adjusts color and brightness based on time, weather, and activity.",
+      security_title: "Active Security",
+      security_desc: "More than recording. AI identifies strangers, sends ms-level alerts, and auto-arms when away.",
+      climate_title: "Climate Control",
+      climate_desc: "Constant temp, humidity, and oxygen. Coordinated AC, floor heating, and fresh air systems."
+    },
+    history: {
+      title: "Development & History",
+      subtitle: "From simple MCU control to complex whole-home interconnection.",
+      btn_github: "View GitHub",
+      items: [
+        {
+          year: "2025",
+          title: "Project Alpha: Voice Hub",
+          desc: "Developed offline voice assistant based on local LLM. Controls all devices without internet to protect privacy.",
+          tags: ['Python', 'IoT', 'Voice AI']
+        },
+        {
+          year: "2024",
+          title: "Smart Mirror V2",
+          desc: "2nd Gen Smart Mirror. Integrated schedule, weather, and health analytics for bathroom scenarios.",
+          tags: ['React Native', 'Raspberry Pi']
+        },
+        {
+          year: "2023",
+          title: "Zigbee Light Array",
+          desc: "Early prototype. Achieved low-latency sync control for 50+ bulbs, solving large-scale mesh packet loss.",
+          tags: ['C++', 'Zigbee', 'Hardware']
+        }
+      ]
+    },
+    contact: {
+      title: "Ready to Upgrade Your Life?",
+      desc: "Leave your contact info for a free on-site survey and design proposal.",
+      ai_title: "Smart Home Advisor (AI Beta)",
+      ai_online: "Online",
+      ai_hint: "Any questions? Ask AI: 'How much does it cost?'",
+      ai_placeholder: "Ask something...",
+      ai_busy: "Sorry, I'm busy. Please call us directly.",
+      footer: "© 2026 SmartLife Tech. All rights reserved."
+    }
+  }
+};
+
 const App = () => {
+  const [lang, setLang] = useState('zh'); // 'zh' | 'en'
+  const t = TRANSLATIONS[lang];
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -23,6 +195,10 @@ const App = () => {
     }
   };
 
+  const toggleLang = () => {
+    setLang(prev => prev === 'zh' ? 'en' : 'zh');
+  };
+
   return (
     <div className="font-sans text-slate-800 bg-slate-50 min-h-screen selection:bg-blue-500 selection:text-white">
       {/* 导航栏 */}
@@ -34,16 +210,22 @@ const App = () => {
 
           {/* 桌面菜单 */}
           <div className="hidden md:flex space-x-8 items-center font-medium text-slate-600">
-            <button onClick={() => scrollToSection('features')} className="hover:text-blue-600 transition">解决方案</button>
-            <button onClick={() => scrollToSection('demo')} className="hover:text-blue-600 transition">在线体验</button>
-            <button onClick={() => scrollToSection('history')} className="hover:text-blue-600 transition">过往案例</button>
+            <button onClick={() => scrollToSection('features')} className="hover:text-blue-600 transition">{t.nav.features}</button>
+            <button onClick={() => scrollToSection('demo')} className="hover:text-blue-600 transition">{t.nav.demo}</button>
+            <button onClick={() => scrollToSection('history')} className="hover:text-blue-600 transition">{t.nav.history}</button>
+            <button onClick={toggleLang} className="flex items-center gap-1 hover:text-blue-600 transition uppercase text-sm font-bold">
+              <Globe size={16} /> {lang === 'zh' ? 'EN' : '中'}
+            </button>
             <button onClick={() => scrollToSection('contact')} className="px-5 py-2 bg-slate-900 text-white rounded-full hover:bg-slate-700 transition">
-              联系我们
+              {t.nav.contact}
             </button>
           </div>
 
           {/* 移动端菜单按钮 */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-4">
+            <button onClick={toggleLang} className="flex items-center gap-1 text-slate-600 font-bold text-sm">
+              <Globe size={18} /> {lang.toUpperCase()}
+            </button>
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <X /> : <Menu />}
             </button>
@@ -53,10 +235,10 @@ const App = () => {
         {/* 移动端菜单 */}
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-lg py-4 flex flex-col items-center space-y-4">
-            <button onClick={() => scrollToSection('features')} className="text-slate-600 py-2">解决方案</button>
-            <button onClick={() => scrollToSection('demo')} className="text-slate-600 py-2">在线体验</button>
-            <button onClick={() => scrollToSection('history')} className="text-slate-600 py-2">过往案例</button>
-            <button onClick={() => scrollToSection('contact')} className="text-blue-600 font-bold py-2">联系我们</button>
+            <button onClick={() => scrollToSection('features')} className="text-slate-600 py-2">{t.nav.features}</button>
+            <button onClick={() => scrollToSection('demo')} className="text-slate-600 py-2">{t.nav.demo}</button>
+            <button onClick={() => scrollToSection('history')} className="text-slate-600 py-2">{t.nav.history}</button>
+            <button onClick={() => scrollToSection('contact')} className="text-blue-600 font-bold py-2">{t.nav.contact}</button>
           </div>
         )}
       </nav>
@@ -68,22 +250,22 @@ const App = () => {
 
         <div className="container mx-auto px-6 relative z-10 text-center">
           <div className="inline-block px-4 py-1.5 mb-6 bg-blue-50 text-blue-600 rounded-full text-sm font-semibold tracking-wide border border-blue-100">
-            🚀 AI 驱动的下一代智能家居系统
+            {t.hero.tag}
           </div>
           <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 leading-tight mb-6">
-            您的家，<br />
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">比想象中更懂您</span>
+            {t.hero.title_start}<br />
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">{t.hero.title_end}</span>
           </h1>
           <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-10">
-            不仅仅是远程控制，而是真正的感知与自动化。我们要打造的，是一个能感知您温度、习惯与情绪的居住空间。
+            {t.hero.desc}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <button onClick={() => scrollToSection('demo')} className="px-8 py-4 bg-blue-600 text-white rounded-lg text-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200 flex items-center justify-center gap-2">
               <Zap size={20} />
-              立即体验 Demo
+              {t.hero.btn_demo}
             </button>
             <button onClick={() => scrollToSection('features')} className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg text-lg font-bold hover:bg-slate-50 transition flex items-center justify-center gap-2">
-              了解方案
+              {t.hero.btn_learn}
               <ArrowRight size={20} />
             </button>
           </div>
@@ -95,16 +277,16 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-2 text-blue-400 font-semibold mb-2">
-              <Sparkles size={18} /> Powered by Gemini
+              <Sparkles size={18} /> {t.demo.powered_by}
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">指尖上的未来</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.demo.title}</h2>
             <p className="text-slate-400 max-w-xl mx-auto">
-              现在，我们将一张真实的客厅照片接入了系统。<br />您可以手动点击，或者直接告诉 AI 您想做什么。
+              {t.demo.desc}
             </p>
           </div>
 
           {/* 这里调用封装好的 DemoSection */}
-          <DemoSection />
+          <DemoSection t={t.demo} lang={lang} />
         </div>
       </section>
 
@@ -112,25 +294,25 @@ const App = () => {
       <section id="features" className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">全屋智能解决方案</h2>
-            <p className="text-slate-600">我们不仅仅销售硬件，更提供完整的场景化设计。</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t.features.title}</h2>
+            <p className="text-slate-600">{t.features.subtitle}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
               icon={<Sun className="text-orange-500" size={32} />}
-              title="智能照明系统"
-              desc="随心而动的光影。根据时间、天气和您的活动自动调节色温与亮度，营造完美氛围。"
+              title={t.features.light_title}
+              desc={t.features.light_desc}
             />
             <FeatureCard
               icon={<Shield className="text-emerald-500" size={32} />}
-              title="主动安防监控"
-              desc="不仅仅是录像。AI识别陌生人，异常情况毫秒级推送，离家模式自动布防。"
+              title={t.features.security_title}
+              desc={t.features.security_desc}
             />
             <FeatureCard
               icon={<Wind className="text-cyan-500" size={32} />}
-              title="环境与气候"
-              desc="恒温、恒湿、恒氧。空调、地暖与新风系统的联动控制，懂您的体感舒适度。"
+              title={t.features.climate_title}
+              desc={t.features.climate_desc}
             />
           </div>
         </div>
@@ -141,33 +323,24 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">开发历程 & Demo</h2>
-              <p className="text-slate-600">从简单的单片机控制到复杂的全屋互联，这是我们的足迹。</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t.history.title}</h2>
+              <p className="text-slate-600">{t.history.subtitle}</p>
             </div>
             <button className="text-blue-600 font-semibold flex items-center gap-1 mt-4 md:mt-0 hover:gap-2 transition-all">
-              查看 GitHub 仓库 <ChevronRight size={18} />
+              {t.history.btn_github} <ChevronRight size={18} />
             </button>
           </div>
 
           <div className="space-y-8">
-            <HistoryItem
-              year="2025"
-              title="Project Alpha: 语音中控中心"
-              desc="成功开发出基于本地大模型的离线语音助手，无需联网即可控制家中所有设备，保护隐私。"
-              tags={['Python', 'IoT', 'Voice AI']}
-            />
-            <HistoryItem
-              year="2024"
-              title="Smart Mirror V2"
-              desc="第二代智能魔镜Demo。集成日程显示、天气预报及健康数据分析，主要用于浴室场景。"
-              tags={['React Native', 'Raspberry Pi']}
-            />
-            <HistoryItem
-              year="2023"
-              title="基于 Zigbee 的灯光阵列"
-              desc="最早的原型验证。实现了对50+灯泡的低延迟同步控制，解决了大规模组网的丢包问题。"
-              tags={['C++', 'Zigbee', 'Hardware']}
-            />
+            {t.history.items.map((item, index) => (
+              <HistoryItem
+                key={index}
+                year={item.year}
+                title={item.title}
+                desc={item.desc}
+                tags={item.tags}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -177,8 +350,8 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-6">准备好升级您的生活空间了吗？</h2>
-              <p className="mb-8 text-lg">留下您的联系方式，我们将提供免费的上门勘测与方案设计。</p>
+              <h2 className="text-3xl font-bold text-white mb-6">{t.contact.title}</h2>
+              <p className="mb-8 text-lg">{t.contact.desc}</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Smartphone className="text-blue-500" />
@@ -199,17 +372,17 @@ const App = () => {
             <div className="bg-slate-800 rounded-xl shadow-lg border border-slate-700 overflow-hidden">
               <div className="bg-slate-700/50 p-4 border-b border-slate-600 flex items-center justify-between">
                 <h3 className="font-bold text-white flex items-center gap-2">
-                  <MessageSquare size={18} className="text-blue-400" /> 智能家居顾问 (AI Beta)
+                  <MessageSquare size={18} className="text-blue-400" /> {t.contact.ai_title}
                 </h3>
-                <span className="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded">Online</span>
+                <span className="text-xs bg-blue-900 text-blue-200 px-2 py-1 rounded">{t.contact.ai_online}</span>
               </div>
               <div className="p-6">
-                <AiConsultant />
+                <AiConsultant t={t.contact} lang={lang} />
               </div>
             </div>
           </div>
           <div className="border-t border-slate-800 mt-16 pt-8 text-center text-sm text-slate-500">
-            &copy; 2026 SmartLife Tech. All rights reserved.
+            {t.contact.footer}
           </div>
         </div>
       </footer>
@@ -224,7 +397,7 @@ const App = () => {
 const apiKey = typeof process !== 'undefined' && process.env.REACT_APP_GEMINI_API_KEY ? process.env.REACT_APP_GEMINI_API_KEY : "";
 
 // DemoSection: 包含 AI 控制逻辑
-const DemoSection = () => {
+const DemoSection = ({ t, lang }) => {
   const [lights, setLights] = useState(true);
   const [temp, setTemp] = useState(24);
   const [mode, setMode] = useState('read'); // 'read' | 'movie'
@@ -245,6 +418,10 @@ const DemoSection = () => {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-09-2025" });
 
+      const instruction = lang === 'en'
+        ? "Reply in English. Keep it short and friendly."
+        : "Reply in Chinese. Keep it short and friendly.";
+
       const prompt = `
                 You are a smart home control assistant. The user will give you a command or describe their current activity/mood.
                 Analyze the intent and return a JSON object to control the room.
@@ -260,7 +437,7 @@ const DemoSection = () => {
                 - 'mode' MUST be either 'read' or 'movie'.
                 - 'lights' MUST be boolean.
                 - 'temp' MUST be a number between 16 and 30.
-                - 'reply' should be a short, friendly confirmation message in Chinese (e.g. "明白，为您切换到观影模式", "为您调高温度").
+                - 'reply' should be a confirmation message. ${instruction}
 
                 Output JSON Format:
                 {
@@ -289,12 +466,12 @@ const DemoSection = () => {
 
       } catch (e) {
         console.error("JSON Parse Error", e);
-        setAiResponse("抱歉，我没太听懂，请再说一次。");
+        setAiResponse(lang === 'zh' ? "抱歉，我没太听懂，请再说一次。" : "Sorry, I didn't quite get that. Please try again.");
       }
 
     } catch (error) {
       console.error("AI Error:", error);
-      setAiResponse("AI 连接似乎有点问题（请检查是否配置了 API Key），请稍后再试。");
+      setAiResponse(lang === 'zh' ? "AI 连接似乎有点问题（请检查是否配置了 API Key），请稍后再试。" : "AI connection issue. Please check your API Key and try again.");
     } finally {
       setAiLoading(false);
     }
@@ -308,13 +485,13 @@ const DemoSection = () => {
         {/* AI Command Input */}
         <div className="bg-gradient-to-br from-blue-900/50 to-slate-800 p-4 rounded-xl border border-blue-500/30 shadow-lg">
           <h3 className="text-sm font-semibold text-blue-300 flex items-center gap-2 mb-3">
-            <Sparkles size={14} /> AI 意图识别
+            <Sparkles size={14} /> {t.ai_title}
           </h3>
           <div className="flex flex-col gap-2">
             <textarea
               value={aiInput}
               onChange={(e) => setAiInput(e.target.value)}
-              placeholder="试着输入: '我想看个电影'..."
+              placeholder={t.ai_placeholder}
               className="w-full bg-slate-900/80 border border-slate-600 rounded-lg p-3 text-xs text-white focus:border-blue-500 focus:outline-none resize-none h-16 md:h-20"
             />
             <button
@@ -322,7 +499,7 @@ const DemoSection = () => {
               disabled={aiLoading}
               className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 px-4 rounded-lg transition flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              {aiLoading ? '思考中...' : 'AI 执行指令'} <Send size={12} />
+              {aiLoading ? t.ai_thinking : t.ai_btn} <Send size={12} />
             </button>
           </div>
           {aiResponse && (
@@ -334,13 +511,13 @@ const DemoSection = () => {
 
         <div className="border-t border-slate-700 my-1"></div>
 
-        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest hidden md:block">手动控制</h3>
+        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest hidden md:block">{t.manual_title}</h3>
 
         <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
           {/* 灯光控制 */}
           <div className="bg-slate-700/50 p-3 md:p-4 rounded-xl border border-slate-600/50">
             <div className="flex justify-between items-center mb-2">
-              <span className="flex items-center gap-2 text-white text-xs md:text-sm"><Sun size={16} /> 主照明</span>
+              <span className="flex items-center gap-2 text-white text-xs md:text-sm"><Sun size={16} /> {t.light_main}</span>
               <div
                 className={`w-10 h-5 md:w-12 md:h-6 rounded-full p-1 cursor-pointer transition-colors ${lights ? 'bg-blue-500' : 'bg-slate-600'}`}
                 onClick={() => setLights(!lights)}
@@ -348,43 +525,45 @@ const DemoSection = () => {
                 <div className={`bg-white w-3 h-3 md:w-4 md:h-4 rounded-full shadow-md transform transition-transform ${lights ? 'translate-x-5 md:translate-x-6' : 'translate-x-0'}`}></div>
               </div>
             </div>
-          </div>
-
-          {/* 温度控制 */}
-          <div className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50">
-            <div className="flex justify-between items-center mb-4">
-              <span className="flex items-center gap-2 text-white"><Thermometer size={18} /> 温控</span>
-              <span className="text-xl font-bold font-mono text-blue-400">{temp}°C</span>
-            </div>
-            <input
-              type="range"
-              min="16"
-              max="30"
-              value={temp}
-              onChange={(e) => setTemp(e.target.value)}
-              className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"
-            />
+            <p className="text-xs text-slate-400 hidden md:block">状态: {lights ? t.status_on : t.status_off}</p>
           </div>
 
           {/* 场景模式 */}
           <div className="bg-slate-700/50 p-3 md:p-4 rounded-xl border border-slate-600/50">
-            <span className="flex items-center gap-2 mb-2 text-white text-xs md:text-sm"><Music size={16} /> 场景</span>
+            <span className="flex items-center gap-2 mb-2 text-white text-xs md:text-sm"><Music size={16} /> {t.scene_mode}</span>
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => { setMode('read'); setLights(true); }}
                 className={`text-xs md:text-sm py-1 md:py-2 rounded-lg transition border ${mode === 'read' ? 'bg-orange-600 border-orange-500 text-white' : 'bg-transparent border-slate-600 text-slate-400 hover:border-slate-500'}`}
               >
-                明亮
+                {t.scene_read}
               </button>
               <button
                 onClick={() => { setMode('movie'); setLights(true); }}
                 className={`text-xs md:text-sm py-1 md:py-2 rounded-lg transition border ${mode === 'movie' ? 'bg-purple-600 border-purple-500 text-white' : 'bg-transparent border-slate-600 text-slate-400 hover:border-slate-500'}`}
               >
-                影院
+                {t.scene_movie}
               </button>
             </div>
           </div>
         </div>
+
+        {/* 温度控制 */}
+        <div className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50">
+          <div className="flex justify-between items-center mb-4">
+            <span className="flex items-center gap-2 text-white"><Thermometer size={18} /> {t.temp_control}</span>
+            <span className="text-xl font-bold font-mono text-blue-400">{temp}°C</span>
+          </div>
+          <input
+            type="range"
+            min="16"
+            max="30"
+            value={temp}
+            onChange={(e) => setTemp(e.target.value)}
+            className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"
+          />
+        </div>
+
       </div>
 
       {/* 视觉反馈区 (右侧 - 移动端在上) */}
@@ -411,21 +590,21 @@ const DemoSection = () => {
         <div className="absolute top-6 right-6 flex flex-col gap-2 items-end">
           <div className="bg-black/40 backdrop-blur-md text-white px-4 py-2 rounded-lg text-sm border border-white/10 shadow-lg flex items-center gap-2">
             <Thermometer size={14} className={temp < 22 ? 'text-blue-300' : 'text-orange-300'} />
-            室内温度: {temp}°C
+            {t.room_temp}: {temp}°C
           </div>
 
           {lights && mode === 'movie' && (
             <div className="bg-purple-900/80 backdrop-blur-md text-purple-100 px-4 py-2 rounded-lg text-sm border border-purple-500/30 shadow-lg animate-pulse">
-              🎬 影院模式已激活
+              🎬 {t.mode_active}
             </div>
           )}
         </div>
 
         {/* 模拟墙面上的智能开关效果 */}
         <div className={`absolute bottom-8 left-8 transition-opacity duration-500 ${lights ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="text-white/80 font-mono text-xs tracking-widest mb-1">CURRENT SCENE</div>
+          <div className="text-white/80 font-mono text-xs tracking-widest mb-1">{t.scene_label}</div>
           <div className="text-white text-3xl font-bold tracking-tight shadow-black drop-shadow-lg">
-            {mode === 'movie' ? 'CINEMA' : 'DAILY LIGHT'}
+            {mode === 'movie' ? t.scene_cinema : t.scene_daily}
           </div>
         </div>
       </div>
@@ -434,7 +613,7 @@ const DemoSection = () => {
 }
 
 // 简单的 AI 问答组件
-const AiConsultant = () => {
+const AiConsultant = ({ t, lang }) => {
   const [query, setQuery] = useState('');
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
@@ -446,9 +625,13 @@ const AiConsultant = () => {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-preview-09-2025" });
 
+      const instruction = lang === 'en'
+        ? "Answer in English (under 50 words)."
+        : "Answer in Chinese (under 50 words).";
+
       const prompt = `
                 You are a helpful sales consultant for a Smart Home company called 'SmartLife Tech'.
-                Answer the customer's question briefly (under 50 words) and professionally in Chinese.
+                ${instruction}
                 Encourage them to book a consultation.
                 User Question: "${query}"
             `;
@@ -457,7 +640,7 @@ const AiConsultant = () => {
       const response = await result.response;
       setAnswer(response.text());
     } catch (error) {
-      setAnswer("抱歉，我现在有点忙，请直接拨打我们的电话咨询。");
+      setAnswer(t.ai_busy);
     } finally {
       setLoading(false);
     }
@@ -465,13 +648,13 @@ const AiConsultant = () => {
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-slate-400 text-sm">有什么不清楚的吗？随便问问 AI，比如“全屋智能大概多少钱？”</p>
+      <p className="text-slate-400 text-sm">{t.ai_hint}</p>
       <div className="flex gap-2">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="请输入您的问题..."
+          placeholder={t.ai_placeholder}
           className="flex-1 bg-slate-900 border border-slate-600 rounded px-3 py-2 text-sm text-white focus:border-blue-500 focus:outline-none"
           onKeyDown={(e) => e.key === 'Enter' && handleAsk()}
         />
