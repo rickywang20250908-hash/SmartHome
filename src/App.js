@@ -507,6 +507,9 @@ const DemoSection = ({ t, lang }) => {
               🤖 {aiResponse}
             </div>
           )}
+          <div className="mt-2 text-[10px] text-slate-500 text-center opacity-50">
+            Debug Info: API Key is {apiKey ? "Loaded ✅" : "Missing ❌"}
+          </div>
         </div>
 
         <div className="border-t border-slate-700 my-1"></div>
