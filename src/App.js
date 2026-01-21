@@ -301,9 +301,9 @@ const DemoSection = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col md:flex-row h-auto md:h-[600px]">
-      {/* 控制面板 (左侧) */}
-      <div className="w-full md:w-80 p-8 border-b md:border-b-0 md:border-r border-slate-700 flex flex-col gap-6 z-10 bg-slate-800 shrink-0 overflow-y-auto">
+    <div className="max-w-6xl mx-auto bg-slate-800 rounded-2xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col-reverse md:flex-row h-auto md:h-[600px]">
+      {/* 控制面板 (左侧 - 移动端在下) */}
+      <div className="w-full md:w-80 p-6 md:p-8 border-t md:border-t-0 md:border-r border-slate-700 flex flex-col gap-6 z-10 bg-slate-800 shrink-0 overflow-y-auto">
 
         {/* AI Command Input */}
         <div className="bg-gradient-to-br from-blue-900/50 to-slate-800 p-4 rounded-xl border border-blue-500/30 shadow-lg">
@@ -314,8 +314,8 @@ const DemoSection = () => {
             <textarea
               value={aiInput}
               onChange={(e) => setAiInput(e.target.value)}
-              placeholder="试着输入: '我想看个电影' 或 '有点冷，我要看书'..."
-              className="w-full bg-slate-900/80 border border-slate-600 rounded-lg p-3 text-xs text-white focus:border-blue-500 focus:outline-none resize-none h-20"
+              placeholder="试着输入: '我想看个电影'..."
+              className="w-full bg-slate-900/80 border border-slate-600 rounded-lg p-3 text-xs text-white focus:border-blue-500 focus:outline-none resize-none h-16 md:h-20"
             />
             <button
               onClick={handleAIOptimize}
@@ -332,62 +332,63 @@ const DemoSection = () => {
           )}
         </div>
 
-        <div className="border-t border-slate-700 my-2"></div>
+        <div className="border-t border-slate-700 my-1"></div>
 
-        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest">手动控制</h3>
+        <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-widest hidden md:block">手动控制</h3>
 
-        {/* 灯光控制 */}
-        <div className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50">
-          <div className="flex justify-between items-center mb-2">
-            <span className="flex items-center gap-2 text-white"><Sun size={18} /> 主照明</span>
-            <div
-              className={`w-12 h-6 rounded-full p-1 cursor-pointer transition-colors ${lights ? 'bg-blue-500' : 'bg-slate-600'}`}
-              onClick={() => setLights(!lights)}
-            >
-              <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform ${lights ? 'translate-x-6' : 'translate-x-0'}`}></div>
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+          {/* 灯光控制 */}
+          <div className="bg-slate-700/50 p-3 md:p-4 rounded-xl border border-slate-600/50">
+            <div className="flex justify-between items-center mb-2">
+              <span className="flex items-center gap-2 text-white text-xs md:text-sm"><Sun size={16} /> 主照明</span>
+              <div
+                className={`w-10 h-5 md:w-12 md:h-6 rounded-full p-1 cursor-pointer transition-colors ${lights ? 'bg-blue-500' : 'bg-slate-600'}`}
+                onClick={() => setLights(!lights)}
+              >
+                <div className={`bg-white w-3 h-3 md:w-4 md:h-4 rounded-full shadow-md transform transition-transform ${lights ? 'translate-x-5 md:translate-x-6' : 'translate-x-0'}`}></div>
+              </div>
             </div>
           </div>
-          <p className="text-xs text-slate-400">状态: {lights ? '开启' : '关闭'}</p>
-        </div>
 
-        {/* 温度控制 */}
-        <div className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50">
-          <div className="flex justify-between items-center mb-4">
-            <span className="flex items-center gap-2 text-white"><Thermometer size={18} /> 温控</span>
-            <span className="text-xl font-bold font-mono text-blue-400">{temp}°C</span>
+          {/* 温度控制 */}
+          <div className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50">
+            <div className="flex justify-between items-center mb-4">
+              <span className="flex items-center gap-2 text-white"><Thermometer size={18} /> 温控</span>
+              <span className="text-xl font-bold font-mono text-blue-400">{temp}°C</span>
+            </div>
+            <input
+              type="range"
+              min="16"
+              max="30"
+              value={temp}
+              onChange={(e) => setTemp(e.target.value)}
+              className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"
+            />
           </div>
-          <input
-            type="range"
-            min="16"
-            max="30"
-            value={temp}
-            onChange={(e) => setTemp(e.target.value)}
-            className="w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer accent-blue-500"
-          />
-        </div>
 
-        {/* 场景模式 */}
-        <div className="bg-slate-700/50 p-4 rounded-xl border border-slate-600/50">
-          <span className="flex items-center gap-2 mb-3 text-white"><Music size={18} /> 场景模式</span>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={() => { setMode('read'); setLights(true); }}
-              className={`text-sm py-2 rounded-lg transition border ${mode === 'read' ? 'bg-orange-600 border-orange-500 text-white' : 'bg-transparent border-slate-600 text-slate-400 hover:border-slate-500'}`}
-            >
-              明亮
-            </button>
-            <button
-              onClick={() => { setMode('movie'); setLights(true); }}
-              className={`text-sm py-2 rounded-lg transition border ${mode === 'movie' ? 'bg-purple-600 border-purple-500 text-white' : 'bg-transparent border-slate-600 text-slate-400 hover:border-slate-500'}`}
-            >
-              影院
-            </button>
+          {/* 场景模式 */}
+          <div className="bg-slate-700/50 p-3 md:p-4 rounded-xl border border-slate-600/50">
+            <span className="flex items-center gap-2 mb-2 text-white text-xs md:text-sm"><Music size={16} /> 场景</span>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => { setMode('read'); setLights(true); }}
+                className={`text-xs md:text-sm py-1 md:py-2 rounded-lg transition border ${mode === 'read' ? 'bg-orange-600 border-orange-500 text-white' : 'bg-transparent border-slate-600 text-slate-400 hover:border-slate-500'}`}
+              >
+                明亮
+              </button>
+              <button
+                onClick={() => { setMode('movie'); setLights(true); }}
+                className={`text-xs md:text-sm py-1 md:py-2 rounded-lg transition border ${mode === 'movie' ? 'bg-purple-600 border-purple-500 text-white' : 'bg-transparent border-slate-600 text-slate-400 hover:border-slate-500'}`}
+              >
+                影院
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 视觉反馈区 (右侧 - 使用真实图片) */}
-      <div className="w-full h-64 md:h-full relative overflow-hidden bg-black flex-grow">
+      {/* 视觉反馈区 (右侧 - 移动端在上) */}
+      <div className="w-full h-72 md:h-full relative overflow-hidden bg-black flex-grow">
         {/* 1. 底层：真实的客厅照片 */}
         <img
           src={roomImageUrl}
