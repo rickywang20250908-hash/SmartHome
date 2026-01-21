@@ -387,7 +387,7 @@ const DemoSection = () => {
       </div>
 
       {/* 视觉反馈区 (右侧 - 使用真实图片) */}
-      <div className="w-full h-full relative overflow-hidden bg-black flex-grow">
+      <div className="w-full h-64 md:h-full relative overflow-hidden bg-black flex-grow">
         {/* 1. 底层：真实的客厅照片 */}
         <img
           src={roomImageUrl}
