@@ -394,7 +394,7 @@ const App = () => {
 
 // 部署配置：优先读取 Vercel 的环境变量，如果本地测试没有配置则为空
 // 这里的 REACT_APP_GEMINI_API_KEY 就是我们在 Vercel 后台需要填写的名字
-const apiKey = typeof process !== 'undefined' && process.env.REACT_APP_GEMINI_API_KEY ? process.env.REACT_APP_GEMINI_API_KEY : "";
+const apiKey = process.env.REACT_APP_GEMINI_API_KEY || "";
 
 // DemoSection: 包含 AI 控制逻辑
 const DemoSection = ({ t, lang }) => {
@@ -507,9 +507,6 @@ const DemoSection = ({ t, lang }) => {
               🤖 {aiResponse}
             </div>
           )}
-          <div className="mt-2 text-[10px] text-slate-500 text-center opacity-50">
-            Debug Info: API Key is {apiKey ? "Loaded ✅" : "Missing ❌"}
-          </div>
         </div>
 
         <div className="border-t border-slate-700 my-1"></div>
