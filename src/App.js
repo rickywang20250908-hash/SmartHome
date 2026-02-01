@@ -5,167 +5,167 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const TRANSLATIONS = {
   zh: {
     nav: {
-      features: "解决方案",
+      features: "核心服务",
       demo: "在线体验",
       history: "过往案例",
-      contact: "联系我们"
+      contact: "预约检测"
     },
     hero: {
-      tag: "🚀 AI 驱动的下一代智能家居系统",
-      title_start: "您的家，",
-      title_end: "比想象中更懂您",
-      desc: "不仅仅是远程控制，而是真正的感知与自动化。我们要打造的，是一个能感知您温度、习惯与情绪的居住空间。",
-      btn_demo: "立即体验 Demo",
-      btn_learn: "了解方案"
+      tag: "🛡️ 为高价值家庭打造的主动式风险管理系统",
+      title_start: "告别",
+      title_end: "家庭隐患",
+      desc: "我们不卖复杂的科技，我们只解决真实的问题：防止漏水灾难、杜绝网络掉线、实现无人值守的安全。让您的家真正让人“省心”。",
+      btn_demo: "查看风险演示",
+      btn_learn: "99元 上门检测"
     },
     demo: {
-      powered_by: "Powered by Gemini",
-      title: "指尖上的未来",
-      desc: "现在，我们将一张真实的客厅照片接入了系统。您可以手动点击，或者直接告诉 AI 您想做什么。",
-      ai_title: "AI 意图识别",
-      ai_placeholder: "试着输入: '我想看个电影' 或 '有点冷，我要看书'...",
-      ai_btn: "AI 执行指令",
-      ai_thinking: "思考中...",
-      manual_title: "手动控制",
-      light_main: "主照明",
-      status_on: "开启",
-      status_off: "关闭",
-      temp_control: "温控",
-      scene_mode: "场景模式",
-      scene_read: "明亮",
-      scene_movie: "影院",
-      room_temp: "室内温度",
-      mode_active: "影院模式已激活",
-      scene_label: "CURRENT SCENE",
-      scene_cinema: "CINEMA",
-      scene_daily: "DAILY LIGHT"
+      powered_by: "核心防护系统演示",
+      title: "假如现在发生了...",
+      desc: "点击下方按钮，模拟家中可能发生的真实风险。看我们的系统如何为您自动处理危机。",
+      ai_title: "AI 风险预判",
+      ai_placeholder: "试着输入: '家里好像漏水了' 或 '我想开启离家模式'...",
+      ai_btn: "模拟风险场景",
+      ai_thinking: "分析风险中...",
+      manual_title: "风险模拟",
+      light_main: "主水阀",
+      status_on: "开启 (正常)",
+      status_off: "已自动关闭 (阻断)",
+      temp_control: "温湿度监控",
+      scene_mode: "防护模式",
+      scene_read: "在家",
+      scene_movie: "离家",
+      room_temp: "机房温度",
+      mode_active: "离家布防中: 即使断网也能报警",
+      scene_label: "CURRENT STATUS",
+      scene_cinema: "ARMED",
+      scene_daily: "SAFE"
     },
     features: {
-      title: "全屋智能解决方案",
-      subtitle: "我们不仅仅销售硬件，更提供完整的场景化设计。",
-      light_title: "智能照明系统",
-      light_desc: "随心而动的光影。根据时间、天气和您的活动自动调节色温与亮度，营造完美氛围。",
-      security_title: "主动安防监控",
-      security_desc: "不仅仅是录像。AI识别陌生人，异常情况毫秒级推送，离家模式自动布防。",
-      climate_title: "环境与气候",
-      climate_desc: "恒温、恒湿、恒氧。空调、地暖与新风系统的联动控制，懂您的体感舒适度。"
+      title: "您买的不是设备，是“没意外”",
+      subtitle: "专门针对大户型与频繁出差家庭的三重防护体系。",
+      light_title: "水浸灾难阻断",
+      light_desc: "在水漫金山前自动关闭总阀。不仅仅是滴滴叫的报警器，而是物理层面的即时止损。",
+      security_title: "网络/断电“不死鸟”",
+      security_desc: "独家双链路冗余设计。即使家里断网、断电，关键报警依然能发到您的手机上。",
+      climate_title: "7x24小时 自动化巡检",
+      climate_desc: "像私人管家一样。每月生成健康报告，主动发现设备离线、电池低电等隐患。"
     },
     history: {
-      title: "开发历程 & Demo",
-      subtitle: "从简单的单片机控制到复杂的全屋互联，这是我们的足迹。",
+      title: "服务过的真实场景",
+      subtitle: "每一个案例，都避免了一次可能的家庭危机。",
       btn_github: "查看 GitHub 仓库",
       items: [
         {
           year: "2025",
-          title: "Project Alpha: 语音中控中心",
-          desc: "成功开发出基于本地大模型的离线语音助手，无需联网即可控制家中所有设备，保护隐私。",
-          tags: ['Python', 'IoT', 'Voice AI']
+          title: "北约克 4000尺 独立屋",
+          desc: "由于屋主经常回国，我们在地下室部署了全套防漏水系统。成功在2025年冬阻止了一次爆管事故。",
+          tags: ['防漏水', '远程托管']
         },
         {
           year: "2024",
-          title: "Smart Mirror V2",
-          desc: "第二代智能魔镜Demo。集成日程显示、天气预报及健康数据分析，主要用于浴室场景。",
-          tags: ['React Native', 'Raspberry Pi']
+          title: "Downtown 高端公寓",
+          desc: "为经常断网的住户部署了“断网报警”系统。通过4G备用链路，确保安防监控永不掉线。",
+          tags: ['网络冗余', '安防']
         },
         {
           year: "2023",
-          title: "基于 Zigbee 的灯光阵列",
-          desc: "最早的原型验证。实现了对50+灯泡的低延迟同步控制，解决了大规模组网的丢包问题。",
-          tags: ['C++', 'Zigbee', 'Hardware']
+          title: "Markham 老房改造",
+          desc: "不破坏装修，通过无线技术实现了全屋灯光与老旧暖通设备的智能化升级。",
+          tags: ['老房改造', '无损安装']
         }
       ]
     },
     contact: {
-      title: "准备好升级您的生活空间了吗？",
-      desc: "留下您的联系方式，我们将提供免费的上门勘测与方案设计。",
-      ai_title: "智能家居顾问 (AI Beta)",
+      title: "先别急着买设备，先做个体检",
+      desc: "很多家庭连基础的网络覆盖都有盲区。我们要做的第一步，是找出您家的“隐形风险”。",
+      ai_title: "7x24 智能客服",
       ai_online: "Online",
-      ai_hint: "有什么不清楚的吗？随便问问 AI，比如“全屋智能大概多少钱？”",
+      ai_hint: "有什么想问的？比如“检测包含什么内容？”",
       ai_placeholder: "请输入您的问题...",
-      ai_busy: "抱歉，我现在有点忙，请直接拨打我们的电话咨询。",
+      ai_busy: "抱歉，咨询人数较多，请直接微信联系我们。",
       footer: "© 2026 SmartLife Tech. All rights reserved."
     }
   },
   en: {
     nav: {
-      features: "Solutions",
-      demo: "Demo",
+      features: "Core Services",
+      demo: "Live Demo",
       history: "Case Studies",
-      contact: "Contact"
+      contact: "Book Audit"
     },
     hero: {
-      tag: "🚀 AI-Driven Next Gen Interactive Home",
-      title_start: "Your Home,",
-      title_end: "Knows You Better",
-      desc: "Beyond remote control—true perception and automation. We build living spaces that sense your temperature, habits, and mood.",
-      btn_demo: "Try Demo",
-      btn_learn: "Learn More"
+      tag: "🛡️ Proactive Risk Management for Premium Homes",
+      title_start: "Say Goodbye to",
+      title_end: "Home Hazards",
+      desc: "We don't sell gadgets; we solve problems. Prevent water damage, eliminate network dead zones, and secure your home when you're away. Peace of mind, delivered.",
+      btn_demo: "See Risk Demo",
+      btn_learn: "$99 Home Health Check"
     },
     demo: {
-      powered_by: "Powered by Gemini",
-      title: "Future at Your Fingertips",
-      desc: "We've connected a real living room photo to the system. Tap manually or tell AI what you want to do.",
-      ai_title: "AI Intent Recognition",
-      ai_placeholder: "Try: 'I want to watch a movie' or 'It's cold, I want to read'...",
-      ai_btn: "Execute Command",
-      ai_thinking: "Thinking...",
-      manual_title: "Manual Control",
-      light_main: "Main Light",
-      status_on: "ON",
-      status_off: "OFF",
-      temp_control: "Temp",
-      scene_mode: "Scene",
-      scene_read: "Bright",
-      scene_movie: "Cinema",
-      room_temp: "Room Temp",
-      mode_active: "Cinema Mode Active",
-      scene_label: "CURRENT SCENE",
-      scene_cinema: "CINEMA",
-      scene_daily: "DAILY LIGHT"
+      powered_by: "Core Protection System Demo",
+      title: "What if this happens...",
+      desc: "Click below to simulate real-world risks. See how our system automatically intervenes to prevent disaster.",
+      ai_title: "AI Risk Assessment",
+      ai_placeholder: "Try: 'I think there is a leak' or 'I am leaving for vacation'...",
+      ai_btn: "Simulate Risk",
+      ai_thinking: "Analyzing Risk...",
+      manual_title: "Risk Simulation",
+      light_main: "Main Water Valve",
+      status_on: "OPEN (Normal)",
+      status_off: "CLOSED (Blocked)",
+      temp_control: "Climate Monitor",
+      scene_mode: "Security Mode",
+      scene_read: "Home",
+      scene_movie: "Away",
+      room_temp: "Server Room Temp",
+      mode_active: "ARMED: Alerting even if WiFi is down",
+      scene_label: "CURRENT STATUS",
+      scene_cinema: "ARMED",
+      scene_daily: "SAFE"
     },
     features: {
-      title: "Whole-Home Solutions",
-      subtitle: "We don't just sell hardware; we provide complete scenario designs.",
-      light_title: "Smart Lighting",
-      light_desc: "Lights that move with you. Auto-adjusts color and brightness based on time, weather, and activity.",
-      security_title: "Active Security",
-      security_desc: "More than recording. AI identifies strangers, sends ms-level alerts, and auto-arms when away.",
-      climate_title: "Climate Control",
-      climate_desc: "Constant temp, humidity, and oxygen. Coordinated AC, floor heating, and fresh air systems."
+      title: "You Buy 'No Surprises', Not Just Hardware",
+      subtitle: "Triple-layer protection designed for large homes and frequent travelers.",
+      light_title: "Water Disaster Block",
+      light_desc: "Auto-shuts the main valve BEFORE the basement floods. Not just a beeping alarm, but instant physical damage control.",
+      security_title: "Network 'Phoenix' Link",
+      security_desc: "Exclusive dual-link redundancy. Even if power or WiFi fails, critical alerts still reach your phone via 4G.",
+      climate_title: "7x24 Auto-Health Check",
+      climate_desc: "Like a private house manager. Monthly health reports proactively find offline devices and low batteries."
     },
     history: {
-      title: "Development & History",
-      subtitle: "From simple MCU control to complex whole-home interconnection.",
+      title: "Real World Protection",
+      subtitle: "Every case study represents a disaster prevented.",
       btn_github: "View GitHub",
       items: [
         {
           year: "2025",
-          title: "Project Alpha: Voice Hub",
-          desc: "Developed offline voice assistant based on local LLM. Controls all devices without internet to protect privacy.",
-          tags: ['Python', 'IoT', 'Voice AI']
+          title: "North York 4000sqft Detached",
+          desc: "Owners travel often. We deployed a full anti-leak system, successfully preventing a pipe burst incident in Winter 2025.",
+          tags: ['Leak Prevention', 'Remote Management']
         },
         {
           year: "2024",
-          title: "Smart Mirror V2",
-          desc: "2nd Gen Smart Mirror. Integrated schedule, weather, and health analytics for bathroom scenarios.",
-          tags: ['React Native', 'Raspberry Pi']
+          title: "Downtown Penthouse",
+          desc: "Deployed 'Network Watchdog' for a client with unstable internet. 4G backup keeps security cameras online 24/7.",
+          tags: ['Network Redundancy', 'Security']
         },
         {
           year: "2023",
-          title: "Zigbee Light Array",
-          desc: "Early prototype. Achieved low-latency sync control for 50+ bulbs, solving large-scale mesh packet loss.",
-          tags: ['C++', 'Zigbee', 'Hardware']
+          title: "Markham Heritage Home",
+          desc: "Smart upgrade for a historic home without damaging walls. Wireless retrofitting for lighting and HVAC.",
+          tags: ['Retrofit', 'Non-invasive']
         }
       ]
     },
     contact: {
-      title: "Ready to Upgrade Your Life?",
-      desc: "Leave your contact info for a free on-site survey and design proposal.",
-      ai_title: "Smart Home Advisor (AI Beta)",
+      title: "Don't Buy Devices, Get a Check-up First",
+      desc: "Most homes have WiFi dead zones and hidden risks. Step one is a professional 'Home Health Audit' to find them.",
+      ai_title: "24/7 AI Support",
       ai_online: "Online",
-      ai_hint: "Any questions? Ask AI: 'How much does it cost?'",
+      ai_hint: "Ask me anything: 'What does the audit cover?'",
       ai_placeholder: "Ask something...",
-      ai_busy: "Sorry, I'm busy. Please call us directly.",
+      ai_busy: "High volume. Please contact us via WeChat.",
       footer: "© 2026 SmartLife Tech. All rights reserved."
     }
   }
@@ -423,28 +423,35 @@ const DemoSection = ({ t, lang }) => {
         : "Reply in Chinese. Keep it short and friendly.";
 
       const prompt = `
-                You are a smart home control assistant. The user will give you a command or describe their current activity/mood.
-                Analyze the intent and return a JSON object to control the room.
+                You are a 'Home Risk Management System' for a premium smart home. 
+                The user will simulate a risk scenario (e.g., "Water leak detected", "I'm leaving for vacation", "Internet is down").
                 
+                Your Goal: Analyze the risk and take IMMEDIATE protective action.
+
+                Control Mappings:
+                - 'lights' now represents: **Main Water Valve**. (true = OPEN/Normal, false = CLOSED/Blocked).
+                - 'mode' now represents: **Security State**. ('read' = HOME/Disarmed, 'movie' = AWAY/Armed).
+                - 'temp' represents: **Server Room Temp**. (Keep between 18-24).
+
                 Current State:
-                - Lights: ${lights ? 'on' : 'off'}
-                - Mode: ${mode} ('read' or 'movie')
+                - Water Valve: ${lights ? 'OPEN' : 'CLOSED'}
+                - Security: ${mode === 'read' ? 'HOME' : 'AWAY'}
                 - Temp: ${temp}
 
                 User Input: "${aiInput}"
 
                 Rules:
-                - 'mode' MUST be either 'read' or 'movie'.
-                - 'lights' MUST be boolean.
-                - 'temp' MUST be a number between 16 and 30.
-                - 'reply' should be a confirmation message. ${instruction}
+                1. IF input mentions "leak", "water", "flood" -> MUST set 'lights' (Valve) to false (CLOSE IT).
+                2. IF input mentions "leaving", "vacation", "bye" -> MUST set 'mode' to 'movie' (IS ARMED).
+                3. IF input mentions "home", "back" -> set 'mode' to 'read' (DISARMED).
+                4. Always provide a reassuring 'reply' confirming the safety action taken. ${instruction}
 
                 Output JSON Format:
                 {
                     "mode": "movie",
-                    "lights": true,
+                    "lights": false,
                     "temp": 24,
-                    "reply": "..."
+                    "reply": "EMERGENCY: Leak detected. Main water valve CLOSED immediately."
                 }
             `;
 
