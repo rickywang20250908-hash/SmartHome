@@ -16,7 +16,8 @@ const TRANSLATIONS = {
       title_end: "家庭隐患",
       desc: "我们不卖复杂的科技，我们只解决真实的问题：防止漏水灾难、杜绝网络掉线、实现无人值守的安全。让您的家真正让人“省心”。",
       btn_demo: "查看风险演示",
-      btn_learn: "99元 上门检测"
+      btn_learn: "99元 上门检测",
+      btn_learn_sub: "发现隐患，再决定是否升级"
     },
     demo: {
       powered_by: "核心防护系统演示",
@@ -45,8 +46,13 @@ const TRANSLATIONS = {
       subtitle: "专门针对大户型与频繁出差家庭的三重防护体系。",
       light_title: "水浸灾难阻断",
       light_desc: "在水漫金山前自动关闭总阀。不仅仅是滴滴叫的报警器，而是物理层面的即时止损。",
-      security_title: "网络/断电“不死鸟”",
-      security_desc: "独家双链路冗余设计。即使家里断网、断电，关键报警依然能发到您的手机上。",
+      security_title: "锁死“单点失效”：三层冗余架构",
+      security_desc: "我们为大户型与经常出差的家庭设计了工程级防护。即使发生网络故障或停电，系统仍能通过物理冗余持续报警并保护家庭。",
+      redundancy: {
+        network: "网络冗余：宽带 + 5G 网络自动秒级切换",
+        power: "供电冗余：核心节点 UPS 保护，停电不断联",
+        notify: "通知冗余：App、短信、语音多路径触达"
+      },
       climate_title: "7x24小时 自动化巡检",
       climate_desc: "像私人管家一样。每月生成健康报告，主动发现设备离线、电池低电等隐患。"
     },
@@ -83,6 +89,7 @@ const TRANSLATIONS = {
       ai_hint: "有什么想问的？比如“检测包含什么内容？”",
       ai_placeholder: "请输入您的问题...",
       ai_busy: "抱歉，咨询人数较多，请直接微信联系我们。",
+      btn_sub: "*发现隐患，再决定是否升级*",
       footer: "© 2026 SmartLife Tech. All rights reserved."
     },
     education: {
@@ -111,7 +118,8 @@ const TRANSLATIONS = {
       title_end: "Home Hazards",
       desc: "We don't sell gadgets; we solve problems. Prevent water damage, eliminate network dead zones, and secure your home when you're away. Peace of mind, delivered.",
       btn_demo: "See Risk Demo",
-      btn_learn: "$99 Home Health Check"
+      btn_learn: "$99 Home Health Check",
+      btn_learn_sub: "Identify risks first, decide later"
     },
     demo: {
       powered_by: "Core Protection System Demo",
@@ -140,8 +148,13 @@ const TRANSLATIONS = {
       subtitle: "Triple-layer protection designed for large homes and frequent travelers.",
       light_title: "Water Disaster Block",
       light_desc: "Auto-shuts the main valve BEFORE the basement floods. Not just a beeping alarm, but instant physical damage control.",
-      security_title: "Network 'Phoenix' Link",
-      security_desc: "Exclusive dual-link redundancy. Even if power or WiFi fails, critical alerts still reach your phone via 4G.",
+      security_title: "Lockdown Single Points of Failure",
+      security_desc: "Engineering-grade protection for premium homes and frequent travelers. Even during major network outages or power failures, our redundant physical architecture ensures your home remains safe and connected.",
+      redundancy: {
+        network: "Network: Auto-failover to Cellular (4G/5G)",
+        power: "Power: UPS-protected critical nodes",
+        notify: "Notification: Multi-path App + SMS + Call alerts"
+      },
       climate_title: "7x24 Auto-Health Check",
       climate_desc: "Like a private house manager. Monthly health reports proactively find offline devices and low batteries."
     },
@@ -178,6 +191,7 @@ const TRANSLATIONS = {
       ai_hint: "Ask me anything: 'What does the audit cover?'",
       ai_placeholder: "Ask something...",
       ai_busy: "High volume. Please contact us via WeChat.",
+      btn_sub: "*Identify risks first, decide later*",
       footer: "© 2026 SmartLife Tech. All rights reserved."
     },
     education: {
@@ -283,15 +297,18 @@ const App = () => {
           <p className="text-xl md:text-2xl text-slate-600 max-w-2xl mx-auto mb-10">
             {t.hero.desc}
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
             <button onClick={() => scrollToSection('demo')} className="px-8 py-4 bg-blue-600 text-white rounded-lg text-lg font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200 flex items-center justify-center gap-2">
               <Zap size={20} />
               {t.hero.btn_demo}
             </button>
-            <button onClick={() => scrollToSection('features')} className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg text-lg font-bold hover:bg-slate-50 transition flex items-center justify-center gap-2">
-              {t.hero.btn_learn}
-              <ArrowRight size={20} />
-            </button>
+            <div className="flex flex-col items-center gap-2">
+              <button onClick={() => scrollToSection('features')} className="w-full px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-lg text-lg font-bold hover:bg-slate-50 transition flex items-center justify-center gap-2">
+                {t.hero.btn_learn}
+                <ArrowRight size={20} />
+              </button>
+              <span className="text-sm text-slate-400 italic font-medium">{t.hero.btn_learn_sub}</span>
+            </div>
           </div>
         </div>
       </header>
@@ -332,7 +349,9 @@ const App = () => {
               icon={<Shield className="text-emerald-500" size={32} />}
               title={t.features.security_title}
               desc={t.features.security_desc}
-            />
+            >
+              <RedundancyDiagram t={t.features.redundancy} />
+            </FeatureCard>
             <FeatureCard
               icon={<Wind className="text-cyan-500" size={32} />}
               title={t.features.climate_title}
@@ -422,7 +441,8 @@ const App = () => {
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div>
               <h2 className="text-3xl font-bold text-white mb-6">{t.contact.title}</h2>
-              <p className="mb-8 text-lg">{t.contact.desc}</p>
+              <p className="mb-2 text-lg">{t.contact.desc}</p>
+              <p className="mb-8 text-sm text-blue-400 italic">{t.contact.btn_sub}</p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Smartphone className="text-blue-500" />
@@ -754,15 +774,83 @@ const AiConsultant = ({ t, lang }) => {
 }
 
 
-const FeatureCard = ({ icon, title, desc }) => (
-  <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+const FeatureCard = ({ icon, title, desc, children }) => (
+  <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
     <div className="mb-4 bg-white w-14 h-14 rounded-full flex items-center justify-center shadow-sm">
       {icon}
     </div>
     <h3 className="text-xl font-bold text-slate-900 mb-3">{title}</h3>
-    <p className="text-slate-600 leading-relaxed text-sm">{desc}</p>
+    <p className="text-slate-600 leading-relaxed text-sm mb-6">{desc}</p>
+    {children && <div className="mt-auto">{children}</div>}
   </div>
 );
+
+const RedundancyDiagram = ({ t }) => {
+  return (
+    <div className="bg-slate-900 rounded-xl p-4 shadow-inner text-[10px] sm:text-xs">
+      <div className="flex flex-col gap-3">
+        {/* Layer 1: Notification */}
+        <div className="flex flex-col items-center">
+          <div className="bg-blue-600/20 border border-blue-500/50 rounded px-2 py-1 text-blue-300 font-bold mb-1">
+            ALERT DELIVERY
+          </div>
+          <div className="flex gap-2">
+            <span className="bg-blue-900/50 border border-blue-500/20 px-1 rounded text-blue-400">App</span>
+            <span className="bg-blue-900/50 border border-blue-500/20 px-1 rounded text-blue-400">SMS/Call</span>
+          </div>
+        </div>
+
+        {/* Lines */}
+        <div className="flex justify-center -my-1">
+          <div className="w-px h-3 bg-blue-500/30"></div>
+        </div>
+
+        {/* Layer 2: Logic Hub */}
+        <div className="flex flex-col items-center">
+          <div className="relative group">
+            <div className="bg-slate-800 border-2 border-emerald-500/50 rounded-lg p-2 flex items-center gap-2">
+              <Zap size={14} className="text-yellow-400 animate-pulse" />
+              <span className="text-white font-mono">CORE HUB (UPS)</span>
+            </div>
+            <div className="absolute -right-2 -top-2 bg-emerald-500 text-[8px] text-white px-1 rounded font-bold">FAILSAFE</div>
+          </div>
+        </div>
+
+        {/* Lines */}
+        <div className="flex justify-center -my-1">
+          <div className="w-px h-3 bg-blue-500/30"></div>
+        </div>
+
+        {/* Layer 3: Network Failover */}
+        <div className="flex justify-center gap-4">
+          <div className="flex flex-col items-center">
+            <Globe size={14} className="text-blue-400 mb-1" />
+            <div className="bg-slate-800 border border-blue-500/30 rounded px-2 py-1 text-slate-400 italic">Broadband</div>
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <div className="text-emerald-500 mb-1">⇄</div>
+          </div>
+          <div className="flex flex-col items-center">
+            <Smartphone size={14} className="text-emerald-400 mb-1" />
+            <div className="bg-slate-800 border border-emerald-500/30 rounded px-2 py-1 text-emerald-400 font-bold">4G/5G Backup</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Legend / Subtext */}
+      <div className="mt-4 pt-3 border-t border-slate-700/50 space-y-1 opacity-80">
+        <div className="flex items-center gap-2 text-blue-300">
+          <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+          {t.network}
+        </div>
+        <div className="flex items-center gap-2 text-yellow-300">
+          <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
+          {t.power}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const HistoryItem = ({ year, title, desc, tags }) => (
   <div className="flex flex-col md:flex-row gap-6 group">
