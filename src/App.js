@@ -84,6 +84,18 @@ const TRANSLATIONS = {
       ai_placeholder: "请输入您的问题...",
       ai_busy: "抱歉，咨询人数较多，请直接微信联系我们。",
       footer: "© 2026 SmartLife Tech. All rights reserved."
+    },
+    education: {
+      title: "为什么需要“专业级”防护？",
+      subtitle: "普通的智能家居只是玩具，我们构建的是家庭基础设施。",
+      vs_title_diy: "普通智能家居 (DIY)",
+      vs_title_pro: "SmartLife 专业级",
+      point1_diy: "依赖单一 Wi-Fi，断网即失联",
+      point1_pro: "双链路冗余，断网断电依然报警",
+      point2_diy: "只会在现场“尖叫”，无人处理",
+      point2_pro: "自动关闭水阀，物理隔绝风险",
+      point3_diy: "电池没电、设备离线不知情",
+      point3_pro: "7x24 远程监控，主动健康报告"
     }
   },
   en: {
@@ -167,6 +179,18 @@ const TRANSLATIONS = {
       ai_placeholder: "Ask something...",
       ai_busy: "High volume. Please contact us via WeChat.",
       footer: "© 2026 SmartLife Tech. All rights reserved."
+    },
+    education: {
+      title: "Why 'Professional Grade' Matters",
+      subtitle: "Standard smart homes are toys; we build home infrastructure.",
+      vs_title_diy: "Basic Smart Home (DIY)",
+      vs_title_pro: "SmartLife Pro-Grade",
+      point1_diy: "Single Wi-Fi dependency (Offline = Blind)",
+      point1_pro: "Dual-link redundancy (Always connected)",
+      point2_diy: "Audible alarms only (No action)",
+      point2_pro: "Active Response (Auto-shuts valves)",
+      point3_diy: "Hidden failures (Dead batteries)",
+      point3_pro: "7x24 Monitoring (Proactive Health Reports)"
     }
   }
 };
@@ -314,6 +338,53 @@ const App = () => {
               title={t.features.climate_title}
               desc={t.features.climate_desc}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* 为什么选择专业级 - 教育区域 */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t.education.title}</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">{t.education.subtitle}</p>
+          </div>
+
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden border border-slate-200 shadow-xl bg-white">
+            <div className="p-10 bg-slate-50 border-r border-slate-200">
+              <h3 className="text-xl font-bold text-slate-400 mb-8 uppercase tracking-widest text-center">{t.education.vs_title_diy}</h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-3 text-slate-500">
+                  <X className="text-slate-300 shrink-0 mt-1" size={18} />
+                  <span>{t.education.point1_diy}</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-500">
+                  <X className="text-slate-300 shrink-0 mt-1" size={18} />
+                  <span>{t.education.point2_diy}</span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-500">
+                  <X className="text-slate-300 shrink-0 mt-1" size={18} />
+                  <span>{t.education.point3_diy}</span>
+                </li>
+              </ul>
+            </div>
+            <div className="p-10 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+              <h3 className="text-xl font-bold text-blue-100 mb-8 uppercase tracking-widest text-center">{t.education.vs_title_pro}</h3>
+              <ul className="space-y-6">
+                <li className="flex items-start gap-3">
+                  <Shield className="text-blue-300 shrink-0 mt-1" size={18} />
+                  <span className="font-medium">{t.education.point1_pro}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Shield className="text-blue-300 shrink-0 mt-1" size={18} />
+                  <span className="font-medium">{t.education.point2_pro}</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Shield className="text-blue-300 shrink-0 mt-1" size={18} />
+                  <span className="font-medium">{t.education.point3_pro}</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
