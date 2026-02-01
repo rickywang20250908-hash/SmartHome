@@ -108,26 +108,30 @@ const TRANSLATIONS = {
     pricing: {
       title: "透明的服务方案",
       subtitle: "没有隐形的强制消费，只有确定的安全感。",
-      audit_title: "1. 风险体检",
-      audit_price: "$99",
-      audit_desc: "一次性实地调研，发现并量化您家的所有隐患。",
-      audit_btn: "立即预约",
-      core_title: "2. 物理漏水防护",
-      core_price: "$499+",
-      core_desc: "包含智能网关、高精度水浸传感器及自动切断阀。在漏水发生瞬间物理关断总阀。",
-      core_btn: "获取报价",
+      audit_title: "1. 核心自动化审计 (咨询)",
+      audit_price: "$299 - $599",
+      audit_desc: "我们负责设计“大脑”：系统架构、自动化逻辑、避坑清单与硬件规格。",
+      audit_btn: "预约设计",
+      core_title: "2. “守护者”方案实施",
+      core_price: "硬件 + $199",
+      core_desc: "我们负责编程与集成，持证电工（外包或推荐）负责法规电气安装。",
+      core_btn: "获取方案",
       sub_title: "3. 长期守护",
       sub_price: "$29/月",
       sub_desc: "7x24 小时管家式监控，确保系统永远处于最佳状态。",
       sub_btn: "了解更多"
     },
     audit_scope: {
-      title: "99元 体检包含什么？",
-      item1: "💧 水浸风险：洗衣机、厨卫漏水与联动可靠性点位检查",
-      item2: "🌐 网络冗余：Wi-Fi 覆盖盲区与断网报警备用链路测试",
-      item3: "⚡ 供电连续：核心网关与路由器的 UPS 备用电源现状评估",
-      item4: "🔔 通知路径：多渠道推送路径与手机勿扰模式屏蔽风险检查",
-      item5: "🏠 离家模式：长途旅行场景下的系统自动化监控逻辑审计"
+      title: "设计咨询包含什么？",
+      item1: "💧 风险审计：水浸、网络、供电等全链路隐患排查评估",
+      item2: "🧩 架构方案：系统逻辑图、避坑硬件清单及本地化方案建议",
+      item3: "🤖 逻辑编写：为您预编写 Home Assistant / Apple Home 自动化逻辑",
+      item4: "⚡ 合规指导：协助您与持证电工对接，确保物理安装符合法规",
+      item5: "🏠 远程访问：安全冗余的远程访问与多层级告警路径审计"
+    },
+    compliance: {
+      footer_note: "合规说明：Smart Life Tech 专注于系统架构与自动化设计。我们不进行受监管的电气（ESA）、安防（ULC）或暖通（TSSA）物理安装，所有相关工程均推荐由持证专业人士（Licensed Trades）执行。",
+      license_qa: "我们是智能系统“架构师”，负责设计心脏与大脑；通过与持证电工合作，确保您的系统既智能又合规。"
     }
   },
   en: {
@@ -233,28 +237,32 @@ const TRANSLATIONS = {
       point3_pro: "7x24 Monitoring (Proactive Health Reports)"
     },
     pricing: {
-      title: "Transparent Pricing",
-      subtitle: "No hidden fees, just guaranteed peace of mind.",
-      audit_title: "1. Risk Audit",
-      audit_price: "$99",
-      audit_desc: "One-time on-site deep dive to identify and quantify every hazard.",
-      audit_btn: "Book Now",
-      core_title: "2. Water Leak Protect",
-      core_price: "$499+",
-      core_desc: "Includes smart hub, precision leak sensors, and automatic shut-off valve. Instant physical flooding prevention.",
-      core_btn: "Get Quote",
-      sub_title: "3. Guardian Plan",
+      title: "Transparent Service Plans",
+      subtitle: "No hidden costs, just reliable peace of mind.",
+      audit_title: "1. Core Automation Design (Consulting)",
+      audit_price: "$299 - $599",
+      audit_desc: "We design the 'Brain': architecture, automation logic, and hardware specs.",
+      audit_btn: "Book Design",
+      core_title: "2. 'Guardian' Implementation",
+      core_price: "Hardware + $199",
+      core_desc: "We handle programming; licensed electricians handle regulated electrical work.",
+      core_btn: "Get a Quote",
+      sub_title: "3. Peace of Mind",
       sub_price: "$29/mo",
-      sub_desc: "7x24 proactive monitoring and managed health checks.",
+      sub_desc: "24/7 heartbeat monitoring to ensure your system is always optimal.",
       sub_btn: "Learn More"
     },
     audit_scope: {
-      title: "What's in the $99 Audit?",
-      item1: "💧 Water Leak: Analysis of sensors & auto-shutoff points",
-      item2: "🌐 Network: Dead zone maps & cellular failover readiness",
-      item3: "⚡ Power: UPS continuity audit for critical hubs/routers",
-      item4: "🔔 Alerts: Notification path redundancy & DND bypass check",
-      item5: "🏠 Empty Home: Automation logic for long-term travelers"
+      title: "What's in the Design Audit?",
+      item1: "💧 Risk Assessment: Multi-point check for leak, network, and power risks.",
+      item2: "🧩 Architecture Plan: Professional logic maps and vetted hardware list.",
+      item3: "🤖 Logic Scripting: Pre-written Home Assistant / Apple Home automations.",
+      item4: "⚡ Compliance: Coordinating with licensed trades for safe physical install.",
+      item5: "🏠 Secure Access: Auditing redundant remote access and multi-path alerts."
+    },
+    compliance: {
+      footer_note: "Compliance: Smart Life Tech specializes in smart home architecture and automation logic. We do not perform regulated electrical (ESA) or security (ULC) installations; such work is referred to licensed trades.",
+      license_qa: "We are Smart Home Architects—we design the logic and partner with licensed trades for the physical infrastructure."
     }
   }
 };
@@ -606,6 +614,9 @@ const App = () => {
             </div>
           </div>
           <div className="border-t border-slate-800 mt-16 pt-8 text-center text-sm text-slate-500">
+            <div className="max-w-3xl mx-auto mb-4 opacity-70 italic leading-relaxed">
+              {t.compliance.footer_note}
+            </div>
             {t.contact.footer}
           </div>
         </div>

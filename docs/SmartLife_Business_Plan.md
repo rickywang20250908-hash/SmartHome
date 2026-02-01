@@ -28,54 +28,33 @@ Avoid "Shotgun Marketing". Focus strictly on **Category A** clients for Phase 1.
 
 ## 2. Product Lineup (The "Result" Economy)
 
-**Concept**: Do not sell "Packages" initially. Sell specific "Risk Solutions".
+### 🧱 Product 1: Core Automation Design (Consulting Only)
+*   **Goal**: Create a reliable "system brain" without the liability of physical wiring.
+*   **Format**: Virtual or On-site Consulting + Documentation.
+*   **Deliverable**: System Architecture Map, YAML/Node-RED logic, and Hardware Spec.
+*   **Price**: **$299 - $599 CAD** (Planning Fee).
 
-### 🧱 Product 1: Smart Home Health Check (The "Foot-in-Door" MVP)
-*   **Goal**: Zero friction entry point. Establish trust.
-*   **Format**: 60-90 Minute On-Site Audit.
-*   **Deliverable**: PDF Health Report (Risk Assessment).
-*   **What We Check**:
-    *   Wi-Fi Dead Zones & Latency.
-    *   Existing Device Stability (Zigbee Mesh strength).
-    *   Water Leak Risks (Under sinks, heaters).
-    *   Security Vulnerabilities (Default passwords, exposed ports).
-*   **Price**: **$99 - $149 CAD** (Low barrier to entry).
-*   **Strategy**: This is a loss-leader to build a relationship and upsell Product 2.
-
-### 🧱 Product 2: Critical Protection Solution (The Profit Driver)
-*   **Concept**: "The Home Guardian". Hardware + Installation focused on PREVENTING disaster.
-*   **Components**:
-    *   **Water**: Multi-point leak detection + Auto-shutoff valve (optional).
-    *   **Network**: Redundant setup or "Offline Alert" monitoring.
-    *   **Power**: UPS for critical bridges/routers.
-*   **Promise**: "If there is a leak, we scream. If internet dies, we know."
-*   **Price**: **$399 - $999 CAD** (Hardware + Setup).
-
-### 🧱 Product 3: "Peace of Mind" Subscription (Recurring Revenue)
-*   **Concept**: Ongoing care for the system. Transforming from "Contractor" to "Partner".
-*   **Features**:
-    *   Remote "Heartbeat" monitoring (Is the Hub online?).
-    *   Auto-updates & Security patches.
-    *   Quarterly "Virtual Health Check".
-    *   Priority Support (Phone/Chat).
-*   **Price**: **$19 / $29 / $49 per month**.
+### 🧱 Product 2: The "Guardian" Implementation (Referral Model)
+*   **Concept**: We design, the Pro installs.
+*   **Workflow**: 
+    1. We design the solution.
+    2. We provide the hardware (or buy-list).
+    3. We coordinate with a licensed ESA Electrician for installation.
+    4. We perform the final software programming.
+*   **Price**: **Hardware Kit + $199 Configuration Fee**.
 
 ---
 
-## 3. Marketing & Client Acquisition (First 10 Clients)
+## 4. Compliance & Licensing Strategy
 
-### Strategy A: The "Community Expert" (WeChat/Local Groups)
-*   **Action**: Offer the **Health Check** to local community groups (Condo chats, Neighborhood groups).
-*   **Pitch**: "I discovered many neighbors have unstable smart locks/cameras. I'm offering a professional network & safety check for $99 to ensure your home is secure."
+> [!IMPORTANT]
+> **Regulatory Boundary**: Smart Life Tech operates as a **Technology Consulting & Software Service**. 
+> We do NOT provide:
+> - Regulated Electrical work (ESA)
+> - Regulated Security Monitoring (ULC)
+> - Regulated HVAC/Gas work (TSSA)
 
-### Strategy B: The "Contractor Alliance"
-*   **Partner With**: Flooring Installers, Plumbers, General Contractors.
-*   **The Pitch to Them**: "I can help you avoid post-renovation liability. If a pipe leaks after you leave, my system warns the owner instantly, saving you from a massive lawsuit."
-*   **Incentive**: Referral fee or value-add for their high-end clients.
-
----
-
-## 4. Web Presence Updates (Planned)
+**Commercial Positioning**: "We are the Architects. We design the smart home's DNA. We partner with licensed trades for the physical infrastructure."
 
 *   **Shift Copywriting**:
     *   FROM: "We use Home Assistant and Zigbee2MQTT" (Tech Speak)
