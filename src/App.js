@@ -105,6 +105,22 @@ const TRANSLATIONS = {
       point3_diy: "电池没电、设备离线不知情",
       point3_pro: "7x24 远程监控，主动健康报告"
     },
+    pricing: {
+      title: "透明的服务方案",
+      subtitle: "没有隐形的强制消费，只有确定的安全感。",
+      audit_title: "1. 风险体检",
+      audit_price: "$99",
+      audit_desc: "一次性实地调研，发现并量化您家的所有隐患。",
+      audit_btn: "立即预约",
+      core_title: "2. 核心防护",
+      core_price: "$499+",
+      core_desc: "从底层物理阻断漏水与断网风险，让房子具备自愈能力。",
+      core_btn: "获取报价",
+      sub_title: "3. 长期守护",
+      sub_price: "$29/月",
+      sub_desc: "7x24 小时管家式监控，确保系统永远处于最佳状态。",
+      sub_btn: "了解更多"
+    },
     audit_scope: {
       title: "99元 体检包含什么？",
       item1: "💧 水浸风险：洗衣机、厨卫漏水与联动可靠性点位检查",
@@ -215,6 +231,22 @@ const TRANSLATIONS = {
       point2_pro: "Active Response (Auto-shuts valves)",
       point3_diy: "Hidden failures (Dead batteries)",
       point3_pro: "7x24 Monitoring (Proactive Health Reports)"
+    },
+    pricing: {
+      title: "Transparent Pricing",
+      subtitle: "No hidden fees, just guaranteed peace of mind.",
+      audit_title: "1. Risk Audit",
+      audit_price: "$99",
+      audit_desc: "One-time on-site deep dive to identify and quantify every hazard.",
+      audit_btn: "Book Now",
+      core_title: "2. Core Protect",
+      core_price: "$499+",
+      core_desc: "Physical hardening against leaks and network failures.",
+      core_btn: "Get Quote",
+      sub_title: "3. Guardian Plan",
+      sub_price: "$29/mo",
+      sub_desc: "7x24 proactive monitoring and managed health checks.",
+      sub_btn: "Learn More"
     },
     audit_scope: {
       title: "What's in the $99 Audit?",
@@ -459,6 +491,51 @@ const App = () => {
                   <span className="font-medium">{t.education.point3_pro}</span>
                 </li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 服务方案 / 定价区域 */}
+      <section id="pricing" className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t.pricing.title}</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">{t.pricing.subtitle}</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* 99元体检 */}
+            <div className="p-8 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center text-center hover:shadow-lg transition">
+              <span className="bg-blue-50 text-blue-600 text-xs font-bold px-3 py-1 rounded-full mb-4">STEP 1</span>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">{t.pricing.audit_title}</h3>
+              <div className="text-3xl font-extrabold text-blue-600 mb-4">{t.pricing.audit_price}</div>
+              <p className="text-slate-500 text-sm mb-8 leading-relaxed">{t.pricing.audit_desc}</p>
+              <button onClick={() => scrollToSection('contact')} className="mt-auto w-full py-3 bg-slate-900 text-white rounded-lg font-bold hover:bg-slate-700 transition">
+                {t.pricing.audit_btn}
+              </button>
+            </div>
+
+            {/* 499元升级 */}
+            <div className="p-8 rounded-2xl bg-slate-900 text-white shadow-xl flex flex-col items-center text-center transform scale-105 z-10">
+              <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 underline">POPULAR</span>
+              <h3 className="text-xl font-bold mb-2">{t.pricing.core_title}</h3>
+              <div className="text-3xl font-extrabold text-blue-400 mb-4">{t.pricing.core_price}</div>
+              <p className="text-slate-400 text-sm mb-8 leading-relaxed">{t.pricing.core_desc}</p>
+              <button onClick={() => scrollToSection('contact')} className="mt-auto w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-500 transition">
+                {t.pricing.core_btn}
+              </button>
+            </div>
+
+            {/* 29元月费 */}
+            <div className="p-8 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center text-center hover:shadow-lg transition">
+              <span className="bg-emerald-50 text-emerald-600 text-xs font-bold px-3 py-1 rounded-full mb-4">RECURRING</span>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">{t.pricing.sub_title}</h3>
+              <div className="text-3xl font-extrabold text-emerald-600 mb-4">{t.pricing.sub_price}</div>
+              <p className="text-slate-500 text-sm mb-8 leading-relaxed">{t.pricing.sub_desc}</p>
+              <button onClick={() => scrollToSection('contact')} className="mt-auto w-full py-3 border border-slate-300 text-slate-700 rounded-lg font-bold hover:bg-slate-50 transition">
+                {t.pricing.sub_btn}
+              </button>
             </div>
           </div>
         </div>
