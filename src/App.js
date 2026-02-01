@@ -17,7 +17,8 @@ const TRANSLATIONS = {
       desc: "我们不卖复杂的科技，我们只解决真实的问题：防止漏水灾难、杜绝网络掉线、实现无人值守的安全。让您的家真正让人“省心”。",
       btn_demo: "查看风险演示",
       btn_learn: "99元 上门检测",
-      btn_learn_sub: "发现隐患，再决定是否升级"
+      btn_learn_sub: "发现隐患，再决定是否升级",
+      view_scope: "查看检测范围"
     },
     demo: {
       powered_by: "核心防护系统演示",
@@ -103,6 +104,14 @@ const TRANSLATIONS = {
       point2_pro: "自动关闭水阀，物理隔绝风险",
       point3_diy: "电池没电、设备离线不知情",
       point3_pro: "7x24 远程监控，主动健康报告"
+    },
+    audit_scope: {
+      title: "99元 体检包含什么？",
+      item1: "💧 水浸风险：洗衣机、厨卫漏水与联动可靠性点位检查",
+      item2: "🌐 网络冗余：Wi-Fi 覆盖盲区与断网报警备用链路测试",
+      item3: "⚡ 供电连续：核心网关与路由器的 UPS 备用电源现状评估",
+      item4: "🔔 通知路径：多渠道推送路径与手机勿扰模式屏蔽风险检查",
+      item5: "🏠 离家模式：长途旅行场景下的系统自动化监控逻辑审计"
     }
   },
   en: {
@@ -119,7 +128,8 @@ const TRANSLATIONS = {
       desc: "We don't sell gadgets; we solve problems. Prevent water damage, eliminate network dead zones, and secure your home when you're away. Peace of mind, delivered.",
       btn_demo: "See Risk Demo",
       btn_learn: "$99 Home Health Check",
-      btn_learn_sub: "Identify risks first, decide later"
+      btn_learn_sub: "Identify risks first, decide later",
+      view_scope: "View Audit Scope"
     },
     demo: {
       powered_by: "Core Protection System Demo",
@@ -205,6 +215,14 @@ const TRANSLATIONS = {
       point2_pro: "Active Response (Auto-shuts valves)",
       point3_diy: "Hidden failures (Dead batteries)",
       point3_pro: "7x24 Monitoring (Proactive Health Reports)"
+    },
+    audit_scope: {
+      title: "What's in the $99 Audit?",
+      item1: "💧 Water Leak: Analysis of sensors & auto-shutoff points",
+      item2: "🌐 Network: Dead zone maps & cellular failover readiness",
+      item3: "⚡ Power: UPS continuity audit for critical hubs/routers",
+      item4: "🔔 Alerts: Notification path redundancy & DND bypass check",
+      item5: "🏠 Empty Home: Automation logic for long-term travelers"
     }
   }
 };
@@ -215,6 +233,7 @@ const App = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showAuditScope, setShowAuditScope] = useState(false);
 
   // 监听滚动，改变导航栏样式
   useEffect(() => {
@@ -307,9 +326,46 @@ const App = () => {
                 {t.hero.btn_learn}
                 <ArrowRight size={20} />
               </button>
-              <span className="text-sm text-slate-400 italic font-medium">{t.hero.btn_learn_sub}</span>
+              <button
+                onClick={() => setShowAuditScope(!showAuditScope)}
+                className="text-sm text-blue-600 font-semibold hover:underline flex items-center gap-1"
+              >
+                {t.hero.view_scope} <ChevronRight size={14} className={showAuditScope ? 'rotate-90' : ''} />
+              </button>
+              <span className="text-xs text-slate-400 italic font-medium">{t.hero.btn_learn_sub}</span>
             </div>
           </div>
+
+          {/* Audit Scope Detail Reveal */}
+          {showAuditScope && (
+            <div className="mt-8 max-w-2xl mx-auto bg-white rounded-xl p-6 border border-blue-100 shadow-xl text-left animate-fade-in">
+              <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <Shield className="text-blue-600" size={20} /> {t.audit_scope.title}
+              </h3>
+              <ul className="space-y-3 text-sm text-slate-600">
+                <li className="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg transition">
+                  <span className="shrink-0 mt-1">A</span>
+                  <span>{t.audit_scope.item1}</span>
+                </li>
+                <li className="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg transition">
+                  <span className="shrink-0 mt-1">B</span>
+                  <span>{t.audit_scope.item2}</span>
+                </li>
+                <li className="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg transition">
+                  <span className="shrink-0 mt-1">C</span>
+                  <span>{t.audit_scope.item3}</span>
+                </li>
+                <li className="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg transition">
+                  <span className="shrink-0 mt-1">D</span>
+                  <span>{t.audit_scope.item4}</span>
+                </li>
+                <li className="flex items-start gap-3 p-2 hover:bg-slate-50 rounded-lg transition">
+                  <span className="shrink-0 mt-1">E</span>
+                  <span>{t.audit_scope.item5}</span>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
       </header>
 
@@ -362,7 +418,7 @@ const App = () => {
       </section>
 
       {/* 为什么选择专业级 - 教育区域 */}
-      <section className="py-20 bg-slate-50">
+      < section className="py-20 bg-slate-50" >
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t.education.title}</h2>
